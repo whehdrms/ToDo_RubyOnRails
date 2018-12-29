@@ -5,6 +5,7 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
+      <%= image_tag("dot.png", class: "nav-active-dot")%>
       <li class="nav-item active">
         <a class="nav-link" href="/memos">ToDo 리스트</a>
       </li>
@@ -14,7 +15,7 @@
     </ul>
     <div class="my-2 my-lg-0" data-toggle="modal" data-target="#notifiactionModal">
       <button class="remove_buttonshape navbar-bell-button" data-toggle="tooltip" data-placement="bottom" title="알림">
-        <% if !@notification.blank? %>
+        <% if !@notifications.blank? %>
           <span class="notifications-counter"><%= @notifications.count %></span>
         <% end %>
         <%= image_tag("bell.png", class: "navbar-bell")%>
@@ -34,7 +35,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <% if @notification.blank? %>
+        <% if @notifications.blank? %>
           마감 시간이 초과된 ToDo가 없습니다.
         <% else %>
           <% @notifications.each do |notification| %>
