@@ -1,0 +1,95 @@
+<div class="modal fade" id="editModal_<%=memo.id%>" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="editModalLabel">ToDo 수정</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= form_tag("/memos/"+memo.id.to_s, method: "patch") do %>
+      	<div class="modal-body">
+      		<div class="form-group">
+      			<label class="control-label required" for="new_memo_title_<%= memo.id %>">제목</label>
+      			<input required="required" autocomplete="off" value="<%= memo.title %>" class="form-control" type="text" name="memo_title" id="new_memo_title_<%= memo.id %>">
+      		</div>
+      		<div class="form-group">
+      			<label class="control-label required" for="new_memo_content_<%= memo.id %>">내용</label>
+      			<textarea class="form-control" placeholder="내용을 입력해주세요." id="new_memo_content_<%= memo.id %>" rows="10" name="memo_content" id="new_memo_content_<%= memo.id %>" required><%= memo.content %></textarea>
+      		</div>
+      		<div class="form-group">
+      			<label class="control-label" for="new_memo_priority">중요도</label>
+            <div class="rating mt-2">
+              <input type="radio" name="memo_priority" value="5" id="5_<%=memo.id%>"><label for="5_<%=memo.id%>"><i class="fa fa-star-o" aria-hidden="true"></i></label>
+              <input type="radio" name="memo_priority" value="4" id="4_<%=memo.id%>"><label for="4_<%=memo.id%>"><i class="fa fa-star-o" aria-hidden="true"></i></label>
+              <input type="radio" name="memo_priority" value="3" id="3_<%=memo.id%>"><label for="3_<%=memo.id%>"><i class="fa fa-star-o" aria-hidden="true"></i></label>
+              <input type="radio" name="memo_priority" value="2" id="2_<%=memo.id%>"><label for="2_<%=memo.id%>"><i class="fa fa-star-o" aria-hidden="true"></i></label>
+              <input type="radio" name="memo_priority" value="1" id="1_<%=memo.id%>"><label for="1_<%=memo.id%>"><i class="fa fa-star-o" aria-hidden="true"></i></label>
+            </div>
+      		</div>
+      		<div class="form-group">
+    		    <div class="d-flex todo_slider">
+      		    <label class="control-label mr-2" for="new_memo_due">마감 기한</label>
+    		    <% if memo.due.nil? %>
+      		    <label class="switch" for="slider_checkbox_<%= memo.id %>">
+                <input type="checkbox" id="slider_checkbox_<%= memo.id %>"/>
+                <div class="slider round"></div>
+              </label>
+            </div>
+            <input id="due_checked_<%= memo.id %>" name="due_checked" type="hidden" value="false"/>
+    			  <div class="due-input-box flex-center flex-space-between tryout-start-at">
+  			    	<div class="form-group">
+  			    	  <div class="input-group-flex">
+          			  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+      			      <input class="form-control" type="text" name="memo_due_date" id="memo_due_date_<%= memo.id %>" readonly/>
+  			    	  </div>
+            	</div>
+      			</div>
+      			<div class="due-input-box flex-center flex-space-between tryout-start-at">
+  			    	<div class="form-group">
+  			    	  <div class="input-group-flex time-position">
+          			  <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+      			      <input class="form-control" type="text" name="memo_due_time" id="memo_due_time_<%= memo.id %>" readonly/>
+  			    	  </div>
+            	</div>
+      			</div>
+      			<% else %>
+      			  <label class="switch" for="slider_checkbox_<%= memo.id %>">
+                <input type="checkbox" id="slider_checkbox_<%= memo.id %>" checked/>
+                <div class="slider round"></div>
+              </label>
+            </div>
+    			  <input id="due_checked_<%= memo.id %>" name="due_checked" type="hidden" value="true"/>
+      			<div class="due-input-box-show flex-center flex-space-between tryout-start-at">
+  			    	<div class="form-group">
+  			    	  <div class="input-group-flex">
+          			  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+          			  <%
+          			    currentDueDateTime = memo.due.to_s
+          			    currentDueDate = currentDueDateTime.split(" ")[0]
+          			    currentDueTime = currentDueDateTime.split(" ")[1][0,5]
+          			  %>
+      			      <input class="form-control" value="<%=currentDueDate%>" type="text" name="memo_due_date" id="memo_due_date_<%= memo.id %>" readonly/>
+  			    	  </div>
+            	</div>
+      			</div>
+      			<div class="due-input-box-show flex-center flex-space-between tryout-start-at">
+  			    	<div class="form-group">
+  			    	  <div class="input-group-flex time-position">
+          			  <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+      			      <input class="form-control" type="text" value="<%=currentDueTime%>" name="memo_due_time" id="memo_due_time_<%= memo.id %>" readonly/>
+  			    	  </div>
+            	</div>
+      			</div>
+      			<% end %>
+      		</div>
+      	</div>
+      	<span class="error-message" id="error_message_<%= memo.id %>"></span>
+      	<div class="modal-footer" onClick="validationCheck('<%= memo.id %>')">
+      		<button type="button" class="btn btn-default btn-cancel" data-dismiss="modal">취소</button>
+      		<input type="submit" name="commit" value="수정" class="btn btn-primary" data-disable-with="등록">
+      	</div>
+      <% end %>
+    </div>
+  </div>
+</div>

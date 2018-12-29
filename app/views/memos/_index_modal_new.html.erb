@@ -1,0 +1,65 @@
+<div class="modal fade" id="newModal" tabindex="-1" role="dialog" aria-labelledby="newModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="newModalLabel">새로운 ToDo 작성</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= form_tag memos_path do %>
+      	<div class="modal-body">
+      		<div class="form-group">
+      			<label class="control-label required" for="new_memo_title">제목</label>
+      			<input required="required" autocomplete="off" placeholder="제목을 입력해주세요." class="form-control" type="text" name="memo_title" id="new_memo_title">
+      		</div>
+      		<div class="form-group">
+      			<label class="control-label required" for="new_memo_content">내용</label>
+      			<textarea class="form-control" placeholder="내용을 입력해주세요." id="new_memo_content" rows="10" name="memo_content" id="new_memo_content" required></textarea>
+      		</div>
+      		<div class="form-group">
+      			<label class="control-label" for="new_memo_priority">중요도</label>
+            <div class="rating mt-2">
+              <input type="radio" name="memo_priority" value="5" id="5"><label for="5"><i class="fa fa-star-o" aria-hidden="true"></i></label>
+              <input type="radio" name="memo_priority" value="4" id="4"><label for="4"><i class="fa fa-star-o" aria-hidden="true"></i></label>
+              <input type="radio" name="memo_priority" value="3" id="3"><label for="3"><i class="fa fa-star-o" aria-hidden="true"></i></label>
+              <input type="radio" name="memo_priority" value="2" id="2"><label for="2"><i class="fa fa-star-o" aria-hidden="true"></i></label>
+              <input type="radio" name="memo_priority" value="1" id="1" checked><label for="1"><i class="fa fa-star-o" aria-hidden="true"></i></label>
+            </div>
+      		</div>
+      		<div class="form-group">
+    		    <div class="d-flex todo_slider">
+      		    <label class="control-label mr-2" for="new_memo_due">마감 기한</label>
+      		    <label class="switch" for="slider_checkbox">
+                <input type="checkbox" id="slider_checkbox" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+    		    <input id="due_checked" name="due_checked" type="hidden" value="false"/>
+      			<div class="due-input-box flex-center flex-space-between tryout-start-at">
+  			    	<div class="form-group">
+  			    	  <div class="input-group-flex">
+          			  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+      			      <input class="form-control" type="text" name="memo_due_date" id="memo_due_date" readonly/>
+  			    	  </div>
+            	</div>
+      			</div>
+      			<div class="due-input-box flex-center flex-space-between tryout-start-at">
+  			    	<div class="form-group">
+  			    	  <div class="input-group-flex time-position">
+          			  <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+      			      <input class="form-control" type="text" name="memo_due_time" id="memo_due_time" readonly/>
+  			    	  </div>
+            	</div>
+      			</div>
+      		</div>
+      	</div>
+	      <span class="error-message" id="error_message"></span>
+      	<div class="modal-footer" onClick="validationCheck(0)">
+      		<button type="button" class="btn btn-default btn-cancel" data-dismiss="modal">취소</button>
+      		<input type="submit" name="commit" value="등록" class="btn btn-primary" data-disable-with="등록">
+      	</div>
+      <% end %>
+    </div>
+  </div>
+</div>

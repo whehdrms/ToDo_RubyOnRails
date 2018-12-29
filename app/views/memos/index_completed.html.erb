@@ -1,0 +1,57 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
+	<div id="divClock" class="clock"></div>
+	<div id="clock"></div>
+</nav>
+<div class="container">
+    <% @memos.each do |memo| %>
+        <%
+            if !memo.due.blank?
+                dueDate = memo.due
+                year = dueDate.year.to_s
+                month = dueDate.month.to_s
+                day = dueDate.day.to_s
+                hour = dueDate.hour.to_s
+                min = dueDate.min.to_s
+                
+                dueString = year+"년 "+month+"월 "+day+"일 "+ "/ "+hour+"시 "+min+"분 마감"
+            else
+                dueString = ""
+            end
+        %>
+    	<div class="row mt-2">
+    		<div class="col-sm-12">
+    			<div class="card border-success" id="todo_<%= memo.id %>">
+    				<div class="card-header">
+    				    <i class="fa fa-clock-o" aria-hidden="true"></i>
+    				    <span id="due_<%= memo.id %>">완료되었습니다.</span>
+    			    </div>
+    				<div class="card-body">
+    					<h5 class="card-title"><%= memo.title %></h5>
+    					<p class="card-text">
+    						<%= memo.content %>
+    					</p>
+    					<div>
+    					    <% if memo.priority > 0 %>
+        					    <% for i in 1..memo.priority  %>
+            					    <i class="fa fa-star priority-star" aria-hidden="true"></i>
+        					    <% end %>
+    					    <% end %>
+    					    <% for i in 1..(5-memo.priority)  %>
+        					    <i class="fa fa-star-o priority-star" aria-hidden="true"></i>
+    					    <% end %>
+    					</div>
+    					<div class="d-flex justify-content-between">
+        					<div><%= dueString %></div>
+        					<div class="done-update-delete d-flex flex-row-reverse">
+            					<%= link_to memo_path(memo), method: "delete", data: { confirm: '정말 삭제하시겠습니까?' } do %>
+                                    <i class="fa fa-trash-o" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="삭제"></i> 
+                                <% end %>
+    					    </div>
+    					</div>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    <%= render "memos/index_modal_edit", memo: memo %>
+	<% end %>
+</div>
