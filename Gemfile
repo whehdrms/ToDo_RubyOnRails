@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'rails_db'
 gem 'bootstrap-sass'
 gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
@@ -37,6 +36,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem "minitest"
+  gem 'minitest-rails-capybara'
 end
 
 group :development do

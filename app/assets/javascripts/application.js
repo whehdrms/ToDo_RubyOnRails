@@ -138,6 +138,9 @@ function completeToggleAjax(div) {
                 console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
             }
             }).done(function(){
+                if (div.parents('.card').hasClass("border-danger")) {
+                    div.parents('.card').removeClass( "border-danger" );
+                }
                 div.parents('.card').toggleClass("border-success");
                 div.parents('.card').children().toggleClass("complete-make-grey");
             });

@@ -9,6 +9,11 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="//cdn.rawgit.com/fgelinas/timepicker/master/jquery.ui.timepicker.css">
+  <%= favicon_link_tag asset_path('favicon.png') %>
+  
+	<meta name="description" content="ToDo List App"/>
+	<meta name="keywords" content="TODO"/>
+	<meta name="author" content="ilovegrepp.site"/>
 </head>
 <body onload="startSettings()">
   <% if current_page?('/memos/completed') %>
