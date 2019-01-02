@@ -1,7 +1,7 @@
 ToDo list App (Ruby on Rails)
 ===
 ### 서비스 링크
-https://ilovegrepp.site/
+(서비스 중단)
 
 환경
 ---
